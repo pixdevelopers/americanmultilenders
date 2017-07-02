@@ -7,11 +7,15 @@
   outline: none;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  font-family: 'Maven Pro', Tahoma;
-  transition: all 250ms; }
+  font-family: 'Maven Pro', Tahoma; }
 
 body {
-  background: #f6f6f6; }
+  background: #f6f6f6;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+  @media (min-width: 768px) {
+    body.stickyontop {
+      margin-top: 81px; } }
 
 .container-1400 {
   width: 100%;
@@ -115,7 +119,22 @@ body {
   top: 0; }
   @media (max-width: 767px) {
     .home-bg {
-      background: url(../images/bg.jpg) no-repeat left; } }
+      background: url(../images/bg.jpg) no-repeat left;
+      top: -20px; } }
+
+.navigation-menu {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+  @media (min-width: 768px) {
+    .navigation-menu.stickyontop {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.9);
+      top: -15px;
+      left: 0;
+      right: 0;
+      padding: 0 40px;
+      z-index: 400;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12); } }
 
 .logo {
   background: url(../images/logo.png) no-repeat center;
@@ -207,6 +226,7 @@ nav.navbar {
 
 .home-content {
   margin-top: 110px;
+  text-align: center;
   overflow: hidden; }
   .home-content h1 {
     font-size: 36px;
@@ -229,40 +249,48 @@ nav.navbar {
     font-size: 20px;
     color: #fff;
     max-width: 550px;
-    margin: 20px 0 65px;
+    margin: 40px auto 40px;
     text-align: left;
-    font-weight: 500; }
+    font-weight: 500;
+    text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0; }
     @media (max-width: 480px) {
       .home-content p.home-des {
         font-size: 17px; } }
+  .home-content span.tiny-text {
+    display: block;
+    color: #FFF;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-style: italic; }
   .home-content a {
-    font-size: 22px;
     display: inline-block;
     color: #fff;
-    font-weight: 900;
-    line-height: 68px;
-    padding: 0 33px;
+    padding: 10px 60px;
     border: 1px solid #fff;
     border-radius: 34px;
-    margin-right: 10px; }
+    font-weight: 600;
+    font-size: 36px;
+    width: 340px;
+    text-align: center;
+    transition: all 300ms; }
     .home-content a.btn-1 {
       background: rgba(216, 35, 67, 0.25); }
-    .home-content a.btn-2 {
-      background: rgba(121, 134, 144, 0.4); }
-    .home-content a:hover {
+    .home-content a:hover, .home-content a:active, .home-content a:focus {
       background: #fff;
-      color: #444;
-      text-decoration: none; }
+      color: #444 !important;
+      text-decoration: none !important; }
     @media (max-width: 767px) {
       .home-content a {
         font-size: 20px; } }
     @media (max-width: 640px) {
       .home-content a {
         display: block;
-        width: 260px;
-        font-size: 19px;
+        font-size: 20px;
         margin: 0 auto 10px;
-        padding: 0 25px; } }
+        padding: 0 25px;
+        padding: 10px 25px;
+        width: 100%; } }
   @media (max-width: 767px) {
     .home-content {
       margin-top: 60px;
@@ -291,18 +319,23 @@ nav.navbar {
   margin-top: 275px;
   padding-bottom: 40px;
   background: #f6f6f6; }
+  @media (max-width: 767px) {
+    .services {
+      margin-top: 120px; } }
   .services .container-1400 {
     overflow: hidden;
     position: relative;
     top: -75px; }
-  .services .col-md-3 {
-    padding: 10px; }
+  .services .col-lg-3 {
+    padding: 10px;
+    margin-bottom: 10px; }
   .services .service-item {
     width: 100%;
     background: #fff;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0 0 9px;
-    padding: 60px 30px 70px; }
+    padding: 60px 30px 70px;
+    height: 100%; }
     .services .service-item .icons {
       width: 129px;
       height: 129px;
@@ -317,7 +350,7 @@ nav.navbar {
         background-position: -387px 0; }
     .services .service-item h3 {
       color: #6b7b88;
-      font-size: 28px;
+      font-size: 22px;
       text-align: center;
       margin: 30px auto 25px; }
     .services .service-item p {
@@ -330,18 +363,27 @@ nav.navbar {
   width: 100%;
   padding: 100px 0;
   min-height: 600px; }
+  @media (max-width: 767px) {
+    .whoweare .container-1400 {
+      padding: 0; } }
   .whoweare h3 {
     font-size: 36px;
     color: #fff;
     text-align: center;
     font-weight: 600;
     text-transform: uppercase; }
+    @media (max-width: 767px) {
+      .whoweare h3 {
+        font-size: 20px; } }
   .whoweare h4 {
     font-size: 20px;
     color: #ed848e;
     text-align: center;
     font-weight: 500;
     margin: 20px auto 35px; }
+    @media (max-width: 767px) {
+      .whoweare h4 {
+        font-size: 16px; } }
   .whoweare p {
     font-size: 18px;
     line-height: 32px;
@@ -351,8 +393,28 @@ nav.navbar {
     @media (max-width: 767px) {
       .whoweare p {
         font-size: 16px;
+        line-height: 22px;
         text-align: left;
         font-weight: 400; } }
+  .whoweare a.btn {
+    font-size: 22px;
+    color: #e1838d;
+    font-weight: 600;
+    line-height: 68px;
+    padding: 0 80px;
+    border-radius: 34px;
+    margin: 30px auto 0;
+    background: #FFF;
+    transition: all 300ms; }
+    .whoweare a.btn:hover {
+      background: #e1838d;
+      color: #FFF; }
+    @media (max-width: 767px) {
+      .whoweare a.btn {
+        max-width: 100%;
+        width: 100%;
+        font-size: 18px;
+        padding: 0 20px; } }
 
 .stats {
   background: url(../images/bg1.jpg) no-repeat center;
@@ -365,7 +427,7 @@ nav.navbar {
     padding: 0 5px; }
     @media (max-width: 767px) {
       .stats .col-sm-2 {
-        margin-bottom: 40px; } }
+        margin-bottom: 20px; } }
   @media (max-width: 1199px) and (min-width: 767px) {
     .stats .left-2ndrow {
       margin-left: 16.66666%; } }
@@ -400,7 +462,7 @@ nav.navbar {
     @media (max-width: 767px) {
       .stats h4 {
         margin: 0 auto;
-        font-size: 22px; } }
+        font-size: 16px; } }
 
 .getaquote {
   width: 100%;
@@ -414,6 +476,9 @@ nav.navbar {
     text-align: center;
     text-transform: uppercase;
     margin: 0 auto 30px; }
+    @media (max-width: 767px) {
+      .getaquote h3 {
+        font-size: 20px; } }
   .getaquote form .col-lg-3 {
     margin: 12px auto;
     padding: 0 10px; }
@@ -427,6 +492,11 @@ nav.navbar {
       right: 28px;
       font-size: 20px;
       color: #6b7b88; }
+      @media (max-width: 767px) {
+        .getaquote form .select-box-col:after {
+          top: 15px;
+          right: 22px;
+          font-size: 15px; } }
   .getaquote form input {
     width: 100%;
     display: block;
@@ -436,6 +506,10 @@ nav.navbar {
     padding: 0 22px;
     font-size: 18px;
     color: #444; }
+    @media (max-width: 767px) {
+      .getaquote form input {
+        font-size: 14px;
+        height: 40px; } }
   .getaquote form select {
     width: 100%;
     display: block;
@@ -448,6 +522,10 @@ nav.navbar {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none; }
+    @media (max-width: 767px) {
+      .getaquote form select {
+        font-size: 14px;
+        height: 40px; } }
   .getaquote form .submit-col {
     float: right; }
     @media (max-width: 767px) {
@@ -459,7 +537,11 @@ nav.navbar {
       font-size: 20px;
       font-weight: 600;
       text-transform: uppercase;
-      border: none; }
+      border: none;
+      transition: all 300ms; }
+      @media (max-width: 767px) {
+        .getaquote form .submit-col input {
+          font-size: 16px; } }
       .getaquote form .submit-col input:hover {
         text-shadow: #334654 18px 9px 0;
         background: #3e4e5a; }
@@ -479,6 +561,11 @@ footer {
     @media (max-width: 992px) {
       footer h4 {
         margin-bottom: 10px; } }
+  footer h6 {
+    color: #ed848e;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 4px; }
   footer p {
     font-size: 16px;
     font-weight: 400;
@@ -495,6 +582,8 @@ footer {
         font-size: 16px;
         color: #fff;
         text-decoration: none; }
+    footer ul.licenses {
+      padding-left: 15px; }
   footer .call {
     background: #ed848e;
     height: 55px;
@@ -575,5 +664,11 @@ footer {
         clear: both;
         text-align: center;
         margin: 0 auto 15px; } }
+
+a.mailto {
+  color: inherit !important;
+  text-decoration: none !important; }
+  a.mailto:hover {
+    text-decoration: underline !important; }
 
 /*# sourceMappingURL=style.css.map */
