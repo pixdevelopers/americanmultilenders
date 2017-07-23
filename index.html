@@ -26,7 +26,7 @@
             <span class="email"><a class="mailto" href="mailto:mona@americanmultilenders.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> mona@americanmultilenders.com</a></span>
         </div>
     </div>
-    <div   class="home-bg"></div>
+    <div class="home-bg"></div>
     <div class="container-1400">
         <div class="navigation-menu">
             <button type="button" class="navbar-toggle-btn collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -42,7 +42,16 @@
                         <li><a href="#">FORMS</a></li>
                         <li><a href="#">CALCULATOR</a></li>
                         <li><a href="#getaquote">GET A QUOTE</a></li>
-                        <li><a href="#about">ABOUT</a></li>
+                        <li>
+                            <div class="m-dropdown"><a class="dropbtn" href="#about">ABOUT <i class="fa fa-caret-down"></i></a>
+                                <div class="m-dropdown-wrapper">
+                                    <div class="m-dropdown-content">
+                                        <a target="_blank" href="https://hosting.bytesoftware.com/apps/BWP_54251" class="btn">Loan Processor</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
                         <li><a href="#contact">CONTACT</a></li>
                     </ul>
                 </div>
@@ -58,7 +67,7 @@
             </p>
             <span class="tiny-text">New Customer? or Returning Customer?</span>
             <a href="https://hosting.bytesoftware.com/apps/BCP_54251" target="_blank" class="btn-1 animated fadeIn">
-                <span class="main-text">Click Here</span>
+                <span class="main-text">Get a Loan</span>
             </a>
             <div class="clear"></div>
         </div>
@@ -77,7 +86,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 animated fadeInUp">
                 <div class="service-item">
                     <div class="icons icon2"></div>
-                    <h3>REFIENCE LOANS</h3>
+                    <h3>REFERENCE LOANS</h3>
                     <p>Are you unhappy with your mortgage? We can help you to lengthen your mortgage and reduce your monthly payments substantially. Apply today!</p>
                 </div>
             </div>
@@ -107,9 +116,6 @@
                 <p>
                     Our founder, Mona Mahnaz Dehmohseni started American Multi Lenders mortgage company since 1993 and she has been dedicated her time and effort to her customers. She has worked with homeowners, just like you, to navigate the complex mortgage market. She knows the local market and she knows how to approach lenders to guarantee attractive loans that works for you. You can trust our team at American Multi Lenders to do the hard work and secure the right loan for your home or business.
                 </p>
-                <div class="text-center">
-                    <a href="https://hosting.bytesoftware.com/apps/BWP_54251" target="_blank" class="btn" id="whoweare">Loan Processor</a>
-                </div>
             </div>
         </div>
     </div>
@@ -140,10 +146,10 @@
     <div class="getaquote" id="getaquote">
         <div class="container-1400 animated fadeInUp">
             <h3>Get a Quote</h3>
-            <form method="POST" action="contact-form.php">
+            <form>
                 <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
                     <select name="loanType" id="loanType" required>
-                        <option selected="" disabled="">Select Loan Type</option>
+                        <option value="" selected="" disabled="">Select Loan Type</option>
                         <option>Home Purchase</option>
                         <option>Refience Loans</option>
                         <option>Comercial Loans</option>
@@ -153,21 +159,21 @@
                 </div>
                 <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
                     <select name="loanAmount" id="loanAmount" required>
-                        <option selected="" disabled="">Select Loan Amount</option>
+                        <option value="" selected="" disabled="">Select Loan Amount</option>
                         <option>Below 500,000</option>
                         <option>Above 500,000</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
                     <select name="propertyValue" id="propertyValue" required>
-                        <option selected="" disabled="">Select Property Value</option>
+                        <option value="" selected="" disabled="">Select Property Value</option>
                         <option>Above 500,000</option>
                         <option>Below 500,000</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
                     <select name="history" id="history" required>
-                        <option selected="" disabled="">Select Credity History</option>
+                        <option value="" selected="" disabled="">Select Credity History</option>
                         <option>Excelent</option>
                         <option>Avarage</option>
                         <option>Bad</option>
@@ -187,7 +193,8 @@
                     <input name="email" id="email" type="email" placeholder="Email" required>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 submit-col">
-                    <input type="submit" value="Get My Quote">
+                    <input id="submitForm" type="submit" value="Get My Quote">
+                    <p id="loading"></p>
                 </div>
             </form>
         </div>

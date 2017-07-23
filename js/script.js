@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 
 
-    $("nav.navbar ul.nav li a").click(function(e) {
+    $("nav.navbar ul.nav li > a").click(function(e) {
         e.preventDefault();
         var href = $(this).attr("href");
         if (href == "#services") {
@@ -57,4 +57,32 @@ $(document).ready(function() {
 
         }
     });
+
+
+    $('form').on('submit', function(e) {
+        var fields = $('form').serialize();
+        $('#loading').text('Sending...');
+        $('#submitForm').prop('disabled', true);
+        $.post('contact-form.php', fields, function(res) {
+            if (res == 'true') {
+                $('#loading').text('Message Sent Successfully!');
+                setTimeout(function() {
+                    $('#loading').text(' ');
+                    $('#submitForm').prop('disabled', false);
+                }, 5000);
+
+            } else {
+                $('#loading').text('Oops! Try again later!');
+                setTimeout(function() {
+                    $('#loading').text(' ');
+                    $('#submitForm').prop('disabled', false);
+                }, 5000);
+
+            }
+            console.log(res);
+
+        });
+        return false;
+    });
+
 });

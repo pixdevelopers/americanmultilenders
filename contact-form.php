@@ -456,25 +456,42 @@ $content = '<!DOCTYPE html>
     $content = str_replace('**propertyValue**',$_POST['propertyValue'],$content);
     $content = str_replace('**history**',$_POST['history'],$content);
 
-    $mail->CharSet = 'UTF-8';
-    $mail->From = $_POST['email'];
-    $mail->FromName = 'AmericanMultiLenders Support';
-    $mail->AddAddress('psikopat.mamo@gmail.coms');
-    $mail->isHTML(true);
-    $mail->Subject = 'You have a new message';
-    $mail->addReplyTo($_POST['email'], $_POST['firstName']);
-    $mail->Body = $content;
+$mail = new PHPMailer;
+$mail->isSMTP();
+
+$mail->SMTPDebug = 0;
+$mail->Host = "smtp.gmail.com";
+$mail->Port = 587;
+$mail->SMTPAuth = true;
+$mail->Username = "amlenders.contact@gmail.com";
+$mail->Password = "Mamomamo123";
+$mail->setFrom('support@americanmultilenders.com', 'AmericanMultiLenders Support');
+$mail->addReplyTo('no-reply@americanmultilenders.com', 'AmericanMultiLenders Support');
+$mail->addAddress('psikopat.mamo@gmail.com', 'A');
+$mail->Subject = 'You have a new quote request';
+$mail->msgHTML($content);
+$mail->AltBody = 'This is a plain-text message body';
+
+    // $mail->CharSet = 'UTF-8';
+    // $mail->isSMTP();
+    // $mail->From = $_POST['email'];
+    // $mail->FromName = 'AmericanMultiLenders Support';
+    // $mail->AddAddress('psikopat.mamo@gmail.coms');
+    // $mail->isHTML(true);
+    // $mail->Subject = 'You have a new message';
+    // $mail->addReplyTo($_POST['email'], $_POST['firstName']);
+    // $mail->Body = $content;
 
 
     if(!$mail->send()) {
-        $data = false;
-        echo json_encode($data);
+        print json_encode(false);
         exit;
     }
-else{
-$data = true;
-        echo json_encode($data);
-}
- }
-else    header( 'Location: /') ;
+    else{
+        print json_encode(true);
+    }
+    }
+    else {
+        print json_encode('checkform');
+    }
 
