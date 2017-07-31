@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 
 
-    $("nav.navbar ul.nav li > a").click(function(e) {
+    $("nav.navbar ul.nav li > a.scrollTo").click(function(e) {
         e.preventDefault();
         var href = $(this).attr("href");
         if (href == "#services") {
@@ -84,5 +84,6 @@ $(document).ready(function() {
         });
         return false;
     });
+
 
 });
