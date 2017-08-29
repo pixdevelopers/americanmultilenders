@@ -1,43 +1,78 @@
-﻿<div style="width: 400px; text-align: center; padding:100px 50px 40px 50px;">
-    <h3> Admin Home</h3>
-    <button ng-click="doLogout()">Log Out</button>
-</div>
-<div class="container">
-    <div class="col-xs-4">
-        <h3> All Categories</h3>
-        <p ng-repeat="item in cats | orderBy:'title'"><a ng-click="selectCat(item)" href="#">{{item.title}}</a> </p>
-    </div>
-    <div class="col-xs-4">
-        <div ng-if="currentCat">
-            <h3> {{currentCat.title}}</h3>
-            <form>
-                <input ng-model="currentCat.title" type="text" class="form-control" name="editCatName" required>
-                <button class="btn btn-warning col-xs-6">Delete</button>
-                <button class="btn btn-info col-xs-6">Save</button>
-            </form>
-             <div class="tr" ng-repeat="item in currentCat.forms">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-9">
-                                <div class="title">{{item.title}}</div>
-                                <div class="meta">{{item.date}} | {{item.format}} | {{item.size}}</div>
-                            </div>
-                            <div class="col-xs-12 col-md-3">
-                                <a class="btn-dl" href="{{item.url}}"> Download</a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+﻿<div class="container-fluid admin">
+    <div class="row">
+        <div class="col-xs-12 dashboard-title-wrapper">
+            <h3 class="dashboard-title">Manage Forms    </h3>
+            <a href="#" ng-click="doLogout()">Log out</a>
         </div>
     </div>
-    <div class="col-xs-4">
-        <h3> Add New Category</h3>
-        <form ng-submit="addCat(newCatName)">
-            <p>
-                <input ng-model="newCatName" type="text" class="form-control" name="newCatName" required>
-            </p>
-            <p>
-                <input type="submit" class="btn btn-success btn-block" value="Add new category">
-            </p>
-        </form>
+    <div class="dashboard-content">
+        <div class="col-xs-3">
+            <h4> Form Categories</h4>
+            <p ng-if="!cats">No Category</p>
+            <p ng-repeat="item in cats | orderBy:'id'"><a ng-click="selectCat(item)" href="#">{{item.title}}</a> </p>
+            <p class="list-add-new-cat"><a ng-click="addNewCat=true" href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add New Category</a> </p>
+        </div>
+        <div ng-if="!addNewCat" class="col-xs-5">
+            <div ng-if="currentCat">
+                <form>
+                    <label>Category Title:</label>
+                    <input ng-model="currentCat.title" type="text" class="form-control" name="editCatName" required>
+                    <div class="clearfix"></div>
+                    <div class="admin-forms-list">
+                        <label>Forms:</label>
+                        <p ng-if="!currentCat.forms">No Forms Added Yet</p>
+                        <button ng-click="addForm(currentCat)">Add new Form</button>
+                        <div ng-if="currentCat.forms" class="tr" ng-repeat="item in currentCat.forms">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="title">{{item.title}}</div>
+                                    <div class="meta">{{item.date}} | {{item.format}} | {{item.size}}</div>
+                                </div>
+                                <div class="col-xs-12 col-md-3">
+                                    <a class="btn-dl" href="{{item.url}}"> View</a> |
+                                    <a class="btn-dl" href="{{item.url}}"> Delete</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button ng-click="removeCat(currentCat)" class="btn btn-warning col-xs-6">Delete Category</button>
+                    <button ng-click="updateCat(currentCat)" class="btn btn-info col-xs-6">Update Category</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <h5> Add New Form to "{{currentCat.title}}"</h5>
+            <form ng-submit="addFormToCat(currentCat)">
+                <label>Enter Form Title:</label>
+                <p>
+                    <input ng-model="newFormTitle" type="text" class="form-control" name="newFormTitle" required>
+                </p>
+                <label>Upload Form:</label>
+                <p>
+                    <input type='file' name='file' id='file'>
+                    <br/>
+                    <input type='button' value='Upload' id='upload' ng-click='upload()'>
+                </p>
+                <p>
+                    <input type="submit" class="btn btn-success btn-block" value="Add Form">
+                </p>
+            </form>
+        </div>
+        <div ng-if="addNewCat" class="col-xs-9">
+            <h3> Add New Category</h3>
+            <form ng-submit="addCat(newCatName)">
+                <label>Enter Category Title:</label>
+                <p>
+                    <input ng-model="newCatName" type="text" class="form-control" name="newCatName" required>
+                </p>
+                <p>
+                    <input type="submit" class="btn btn-success btn-block" value="Add New Category">
+                </p>
+            </form>
+        </div>
+        <div class="clearfix"></div>
     </div>
 </div>

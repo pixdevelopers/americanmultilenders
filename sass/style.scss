@@ -7,6 +7,7 @@
 
 
 
+
 /* KEYHAN & Mamo CSS Document */
 
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900');
@@ -643,27 +644,26 @@ nav.navbar {
                     background: #3e4e5a;
                 }
             }
-
         }
     }
 }
 
-            .quote-status {
-                text-align: center;
-                padding-top: 20px;
-                margin-bottom: 30px;
-                p {
-                    font-size: 14px;
-                    &.loading {}
-                    &.success {
-                        color:#169b00;
-                    }
-                    &.failed {
-                        color:#d10000;
-                    }
-                }
-            }
-            
+.quote-status {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 30px;
+    p {
+        font-size: 14px;
+        &.loading {}
+        &.success {
+            color: #169b00;
+        }
+        &.failed {
+            color: #d10000;
+        }
+    }
+}
+
 footer {
     background: #6b7b88;
     width: 100%;
@@ -1071,6 +1071,53 @@ a.mailto {
             }
             .fa {
                 margin-right: 5px;
+            }
+        }
+    }
+}
+
+.admin {
+    .dashboard-title-wrapper {
+        background: #F1f1f1;
+        padding: 20px 30px;
+        .dashboard-title {
+            font-size: 22px;
+            float: left;
+        }
+        a {
+            float: right;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+    }
+    .dashboard-content {
+        padding: 40px 0 300px;
+        .list-add-new-cat{
+            a {
+                color:#ed848e;
+                font-weight: bold;
+                .fa{
+                    margin-right: 10px;
+                }
+            }
+        }
+        .admin-forms-list {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            .tr {
+                padding: 15px 0;
+                border-top: 1px solid #ddd;
+                .title {
+                    color: #555555;
+                    font-size: 18px;
+                    @media (max-width: 767px) {
+                        font-size:14px;
+                    }
+                }
+                .meta {
+                    color: #8f8f8f;
+                    font-size: 12px;
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    angular.module('amlApp', ['ngRoute'])
+    angular.module('amlApp', ['ngRoute', 'ngCookies'])
         .config(function($routeProvider, $locationProvider) {
             $locationProvider.html5Mode(true).hashPrefix("!");
             $routeProvider
@@ -33,34 +33,97 @@
                     redirectTo: '/404'
                 });
         })
+        .run(['$rootScope', '$window', function($rootScope, $window) {
+            $window.onload = function() {
+                $('.col-lg-3').matchHeight();
+                $('.counter').counterUp({
+                    delay: 10,
+                    time: 1000
+                });
+                $('.whoweare .container-1400').fadeOut();
+                var stickynav = $('.tiny-text').waypoint({
 
-        .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$http', function($scope, $rootScope, $location, $http) {
+                    handler: function(direction) {
+                        if (direction === 'down') {
+                            $('body').addClass('stickyontop');
+                            $('.navigation-menu').addClass('stickyontop');
 
-            if (!$rootScope.isAuth) {
-                $location.path('admin/login');
+                        } else {
+                            $('body').removeClass('stickyontop');
+                            $('.navigation-menu').removeClass('stickyontop');
+                        }
+                    },
+                    offset: -100
+                });
+
+                var waypoints = $('#about').waypoint({
+                    handler: function(direction) {
+                        $('.whoweare .container-1400').fadeIn();
+                    },
+                    offset: 250
+
+                });
+
+
+                $('.getaquote .container-1400').fadeOut();
+
+                var waypoints = $('#getaquote').waypoint({
+                    handler: function(direction) {
+                        $('.getaquote .container-1400').fadeIn();
+                    },
+                    offset: 250
+
+                });
+
+
+
+                $("nav.navbar ul.nav li > a.scrollTo").click(function(e) {
+                    e.preventDefault();
+                    var href = $(this).attr("href").replace('/', '');
+                    if (href == "#services") {
+                        $('html,body').animate({ scrollTop: $(href).offset().top - 200 }, 400);
+                    } else if (href == "#home") {
+                        $('html,body').animate({ scrollTop: $('html').offset().top }, 400);
+                    } else {
+                        $('html,body').animate({ scrollTop: $(href).offset().top }, 400);
+
+                    }
+                });
+
+
+
+            };
+        }])
+
+        .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookies', function($scope, $rootScope, $location, $http, $cookies) {
+            var isAuth = $cookies.get('isAuth');
+            if (isAuth == 'loggedIn') {
+                $location.path('admin/dashboard');
             }
             $scope.doLogin = function() {
                 var data = { username: $scope.email, password: $scope.password };
                 $http.post('api/login.php', data).then(function(res) {
-                    console.log(res.data);
                     if (res.data) {
-                        $rootScope.isAuth = true;
+                        $cookies.put('isAuth', 'loggedIn');
                         $location.path('admin/dashboard');
                     } else {
-                        $location.path('admin/login')
-                        $scope.unsuccessfull = true;
+                        $location.path('admin/login');
+                        console.log('Wrong Credentials');
                     }
                 });
 
             }
 
         }])
-        .controller('adminCtrl', ['$scope', '$route', '$rootScope', '$location', '$http', function($scope, $route, $rootScope, $location, $http) {
-
-            // if (!$rootScope.isAuth) {
-            //     $location.path('admin/login');
-            //     return false;
-            // }
+        .controller('adminCtrl', ['$scope', '$route', '$rootScope', '$location', '$http', '$cookies', function($scope, $route, $rootScope, $location, $http, $cookies) {
+            var isAuth = $cookies.get('isAuth');
+            if (isAuth == 'loggedIn') {
+                $http.get('api/forms.php').then(function(res) {
+                    $scope.cats = angular.fromJson(res.data);
+                });
+            } else {
+                $location.path('admin/login');
+            }
             $scope.addCat = function(cat) {
                 var category = { request: 'add', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
@@ -68,17 +131,80 @@
                     $route.reload();
                 });
             }
-            $http.get('api/forms.php').then(function(res) {
-                $scope.cats = angular.fromJson(res.data);
-            });
+
+            $scope.addForm = function(cat) {
+                var category = { request: 'addForm', category: cat };
+                $http.post('api/rest.php', category).then(function(res) {
+                    console.log(res.data);
+                    $route.reload();
+                });
+            }
+
+
             $scope.doLogout = function() {
-                $rootScope.isAuth = false;
+                $cookies.put('isAuth', false);
                 $location.path('admin/login');
             }
+
             $scope.selectCat = function(category) {
+                $scope.addNewCat = false;
                 $scope.currentCat = category;
                 $scope.currentCat.forms = angular.fromJson(category.forms);
 
+            }
+            $scope.removeCat = function(cat) {
+                var category = { request: 'remove', category: cat };
+                if (confirm('Are you sure? This will remove all forms inside the category!')) {
+                    $http.post('api/rest.php', category).then(function(res) {
+                        console.log(res.data);
+                        $route.reload();
+                    });
+                }
+
+            }
+
+            $scope.updateCat = function(cat) {
+                var category = { request: 'update', category: cat };
+                $http.post('api/rest.php', category).then(function(res) {
+                    console.log(res.data);
+                });
+
+
+            }
+
+            $scope.upload = function() {
+
+                var fd = new FormData();
+                var files = document.getElementById('file').files[0];
+                fd.append('file', files);
+                $http({
+                    method: 'post',
+                    url: 'api/upload.php',
+                    data: fd,
+                    headers: { 'Content-Type': undefined },
+                }).then(function successCallback(response) {
+                    $scope.fileUploadResponse = response.data;
+
+                });
+            }
+
+            $scope.addFormToCat = function(cat) {
+                var base = $location.host();
+                var downloadURL = $location.$$absUrl + '/' + $scope.fileUploadResponse.name;
+                var req = {
+                    request: 'upload',
+                    category: cat,
+                    file: {
+                        downloadURL: 'http://'+ base + '/uploads/forms/' + $scope.fileUploadResponse.name,
+                        size: $scope.fileUploadResponse.size,
+                        ext: $scope.fileUploadResponse.ext,
+                        date: $scope.fileUploadResponse.date,
+                        title: $scope.newFormTitle
+                    }
+                };
+                $http.post('api/rest.php', req).then(function(res) {
+                    console.log(res);
+                });
             }
         }])
         .controller('contactCtrl', ['$http', '$scope', '$timeout', function($http, $scope, $timeout) {
