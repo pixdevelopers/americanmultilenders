@@ -6,7 +6,8 @@
 
 
 
-/* KEYHAN CSS Document */
+
+/* KEYHAN & Mamo CSS Document */
 
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900');
 * {
@@ -153,6 +154,8 @@ body {
 .navigation-menu {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    padding-bottom: 15px;
+
     @media(min-width: 768px) {
         &.stickyontop {
             position: fixed;
@@ -164,9 +167,6 @@ body {
             z-index: 400;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12);
         }
-    }
-    &.subpage {
-        padding-bottom:15px;
     }
 }
 
@@ -643,10 +643,27 @@ nav.navbar {
                     background: #3e4e5a;
                 }
             }
+
         }
     }
 }
 
+            .quote-status {
+                text-align: center;
+                padding-top: 20px;
+                margin-bottom: 30px;
+                p {
+                    font-size: 14px;
+                    &.loading {}
+                    &.success {
+                        color:#169b00;
+                    }
+                    &.failed {
+                        color:#d10000;
+                    }
+                }
+            }
+            
 footer {
     background: #6b7b88;
     width: 100%;
@@ -860,15 +877,14 @@ a.mailto {
 
         text-transform: uppercase;
     }
-    &.inner{
-        background:#f1f1f1;
-        h1{
+    &.inner {
+        background: #f1f1f1;
+        h1 {
             margin-top: 60px;
         }
-        h3{
+        h3 {
             margin-bottom: 60px;
         }
-
     }
 }
 
@@ -981,83 +997,81 @@ a.mailto {
 }
 
 
-.forms-container{
-    padding:80px 0;
-            @media (min-width: 768px) and (max-width: 992px) {
-            width: 100% !important;
-        }
-    .forms-sidebar{
-        ul{
+.forms-container {
+    padding: 80px 0;
+    @media (min-width: 768px) and (max-width: 992px) {
+        width: 100% !important;
+    }
+    .forms-sidebar {
+        ul {
             list-style: none;
             li {
-                a{
-                    color:#707070;
-                    padding:5px 0;
+                a {
+                    color: #707070;
+                    padding: 5px 0;
                     display: block;
-                    .fa{
+                    .fa {
                         margin-right: 10px;
                     }
-                    &.active{
-                        color:#ed848e;
+                    &.active {
+                        color: #ed848e;
                         font-weight: 700;
                     }
                 }
             }
         }
     }
-    .forms-content{
-          @media (max-width: 767px) {
-                           margin-top:40px;
-                        }
-        .th{
-            color:#6b7b88;
+    .forms-content {
+        @media (max-width: 767px) {
+            margin-top:40px;
+        }
+        .th {
+            color: #6b7b88;
             font-size: 22px;
-            padding-bottom:15px;
-            border-bottom:3px solid #CCC;
-            span{
+            padding-bottom: 15px;
+            border-bottom: 3px solid #CCC;
+            span {
                 font-size: 16px;
-                 @media (max-width: 767px) {
-                            display: block;
-                        }
+                @media (max-width: 767px) {
+                    display: block;
+                }
             }
         }
-        .tr{
-            padding:25px 0;
-            border-bottom:1px solid #ddd;
-            .title{
-                color:#555555;
-                font-size:18px;
-                      @media (max-width: 767px) {
-                font-size:14px;
-                        }
+        .tr {
+            padding: 25px 0;
+            border-bottom: 1px solid #ddd;
+            .title {
+                color: #555555;
+                font-size: 18px;
+                @media (max-width: 767px) {
+                    font-size:14px;
+                }
             }
-            .meta{
-                color:#8f8f8f;
+            .meta {
+                color: #8f8f8f;
                 font-size: 12px;
             }
-
         }
-        .btn-dl{
+        .btn-dl {
             display: block;
-            color:#FFF;
-            background:#fb6e6f;
+            color: #FFF;
+            background: #fb6e6f;
             text-decoration: none !important;
             font-size: 16px;
-            border-radius:5px;
-            border-bottom:3px solid darken(#fb6e6f,15%);
+            border-radius: 5px;
+            border-bottom: 3px solid darken(#fb6e6f, 15%);
             text-align: center;
             transition: all 300ms;
-            padding:10px 0;
-            &:hover{
-                background:darken(#fb6e6f,15%);
+            padding: 10px 0;
+            &:hover {
+                background: darken(#fb6e6f, 15%);
             }
-                        @media (max-width: 992px) {
-                            margin-top: 15px;
-                        }
-                        .fa{
-                            margin-right:5px;
-                        }
-
+            @media (max-width: 992px) {
+                margin-top: 15px;
+            }
+            .fa {
+                margin-right: 5px;
+            }
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿<div class="container-1400">
+    <ng-include src="'views/nav.html'"></ng-include>
+</div>
+<div class="featured-img">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <h3>Want to get in touch with us? We'd love to hear from you!</h3>
+    </div>
+</div>
+<div class="contact-details">
+    <div class="container">
+        <div class="details-container">
+            <div class="col-xs-12 col-md-5 pull-left contact-info">
+                <p><span class="labels">Address:</span>26126 Alizia Canyon Drive Calabasas, California, United States.</p>
+                <p><span class="labels">Phone:</span>(818) 402-2302</p>
+                <p><span class="labels">Fax:</span>(818) 286-1957</p>
+                <p><span class="labels">Email:</span>mona@americanmultilenders.com</p>
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-7 pull-right contact-form">
+                <form name="contactForm" ng-submit="submitForm()">
+                    <div class="form-group">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <input ng-model="name" type="text" class="form-control" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <input ng-model="email" type="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        <textarea ng-model="message" class="form-control" placeholder="Message" required></textarea>
+                    </div>
+                    <input ng-disabled="locked" type="submit" class="btn btn-submit btn-block" value="Send Message">
+                </form>
+                <div class="quote-status">
+                    <p class="loading" ng-if="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please wait</p>
+                    <p class="success" ng-if="contactForm.$submitted && status && !loading">Your message has been sent successfully!</p>
+                    <p class="failed" ng-if="contactForm.$submitted && !status && !loading">Oops! Something went wrong!</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="gmap">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5673.771671102768!2d-118.69683798907607!3d34.16284957015201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e82736254c4ba7%3A0x24f23bbabb4d5a58!2s26126+Alizia+Canyon+Dr%2C+Calabasas%2C+CA+91302%2C+USA!5e0!3m2!1sen!2sir!4v1502482912805" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>

@@ -1,8 +1,6 @@
-// KEYHAN JavaScript Document
+// KEYHAN & Mamo JavaScript Document
 
-$(window).load(function() {});
-
-$(document).ready(function() {
+ window.onload = function() {
     $('.col-lg-3').matchHeight();
     $('.counter').counterUp({
         delay: 10,
@@ -47,7 +45,7 @@ $(document).ready(function() {
 
     $("nav.navbar ul.nav li > a.scrollTo").click(function(e) {
         e.preventDefault();
-        var href = $(this).attr("href");
+        var href = $(this).attr("href").replace('/','');
         if (href == "#services") {
             $('html,body').animate({ scrollTop: $(href).offset().top - 200 }, 400);
         } else if (href == "#home") {
@@ -59,31 +57,30 @@ $(document).ready(function() {
     });
 
 
-    $('form').on('submit', function(e) {
-        var fields = $('form').serialize();
-        $('#loading').text('Sending...');
-        $('#submitForm').prop('disabled', true);
-        $.post('contact-form.php', fields, function(res) {
-            if (res == 'true') {
-                $('#loading').text('Message Sent Successfully!');
-                setTimeout(function() {
-                    $('#loading').text(' ');
-                    $('#submitForm').prop('disabled', false);
-                }, 5000);
+    // $('form#getQuote').on('submit', function(e) {
+    //     var fields = $('form').serialize();
+    //     $('#loading').text('Sending...');
+    //     $('#submitForm').prop('disabled', true);
+    //     $.post('contact-form.php', fields, function(res) {
+    //         if (res == 'true') {
+    //             $('#loading').text('Message Sent Successfully!');
+    //             setTimeout(function() {
+    //                 $('#loading').text(' ');
+    //                 $('#submitForm').prop('disabled', false);
+    //             }, 5000);
 
-            } else {
-                $('#loading').text('Oops! Try again later!');
-                setTimeout(function() {
-                    $('#loading').text(' ');
-                    $('#submitForm').prop('disabled', false);
-                }, 5000);
+    //         } else {
+    //             $('#loading').text('Oops! Try again later!');
+    //             setTimeout(function() {
+    //                 $('#loading').text(' ');
+    //                 $('#submitForm').prop('disabled', false);
+    //             }, 5000);
 
-            }
-            console.log(res);
+    //         }
+    //         console.log(res);
 
-        });
-        return false;
-    });
+    //     });
+    //     return false;
+    // });
 
-
-});
+};

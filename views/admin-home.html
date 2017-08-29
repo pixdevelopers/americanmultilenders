@@ -1,0 +1,43 @@
+﻿<div style="width: 400px; text-align: center; padding:100px 50px 40px 50px;">
+    <h3> Admin Home</h3>
+    <button ng-click="doLogout()">Log Out</button>
+</div>
+<div class="container">
+    <div class="col-xs-4">
+        <h3> All Categories</h3>
+        <p ng-repeat="item in cats | orderBy:'title'"><a ng-click="selectCat(item)" href="#">{{item.title}}</a> </p>
+    </div>
+    <div class="col-xs-4">
+        <div ng-if="currentCat">
+            <h3> {{currentCat.title}}</h3>
+            <form>
+                <input ng-model="currentCat.title" type="text" class="form-control" name="editCatName" required>
+                <button class="btn btn-warning col-xs-6">Delete</button>
+                <button class="btn btn-info col-xs-6">Save</button>
+            </form>
+             <div class="tr" ng-repeat="item in currentCat.forms">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-9">
+                                <div class="title">{{item.title}}</div>
+                                <div class="meta">{{item.date}} | {{item.format}} | {{item.size}}</div>
+                            </div>
+                            <div class="col-xs-12 col-md-3">
+                                <a class="btn-dl" href="{{item.url}}"> Download</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <h3> Add New Category</h3>
+        <form ng-submit="addCat(newCatName)">
+            <p>
+                <input ng-model="newCatName" type="text" class="form-control" name="newCatName" required>
+            </p>
+            <p>
+                <input type="submit" class="btn btn-success btn-block" value="Add new category">
+            </p>
+        </form>
+    </div>
+</div>

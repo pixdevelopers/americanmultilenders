@@ -1,0 +1,147 @@
+<div class="home-bg"></div>
+<div class="container-1400">
+    <ng-include src="'views/nav.html'"></ng-include>
+    <div class="home-content">
+        <h1 class="animated fadeInDown">FIND THE PERFECT LOAN FOR YOU</h1>
+        <h2 class="animated fadeInDown">We're with you every step of the way</h2>
+        <p class="home-des">
+            Get a real approval with few simple clicks from Freddie mac or Fannie mae. Match any rates and prices from any major financial institutions
+        </p>
+        <span class="tiny-text">New Customer? or Returning Customer?</span>
+        <a href="https://hosting.bytesoftware.com/apps/BCP_54251" target="_blank" class="btn-1 animated fadeIn">
+                <span class="main-text">Get a Loan</span>
+            </a>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="services" class="services">
+    <div class="container-1400">
+        <div class="col-lg-3 col-md-6 col-sm-6 animated fadeInUp">
+            <div class="service-item">
+                <div class="icons icon1"></div>
+                <h3>HOME PURCHASE
+
+</h3>
+                <p>We make the home buying process fast and simple with many different loan options just for you. Contact us now for a quote!</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 animated fadeInUp">
+            <div class="service-item">
+                <div class="icons icon2"></div>
+                <h3>REFERENCE LOANS</h3>
+                <p>Are you unhappy with your mortgage? We can help you to lengthen your mortgage and reduce your monthly payments substantially. Apply today!</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 animated fadeInUp">
+            <div class="service-item">
+                <div class="icons icon3"></div>
+                <h3>COMERCIAL LOANS</h3>
+                <p>Small businesses loans fast & reliable. We can help you to finance your business? Contact us today for more information!</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 animated fadeInUp">
+            <div class="service-item">
+                <div class="icons icon4"></div>
+                <h3>CONSTRUCTION LOANS</h3>
+                <p>Our mission is helping you with construction loans for your home or small business. Get in touch with us!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="whoweare" id="about">
+    <div class="container-1400 animated fadeInUp">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>WHY CHOOSE AMERICAN MULTI LENDERS?</h3>
+            <h4>Customer satisfaction is our number one priority.</h4>
+            <p>
+                Our dedicated team understands that buying a house is the biggest financial decision of your life, whether it’s your first home or sixth move. We’re committed to making the process as seamless, friendly and financially valuable to you as possible. That’s why we built a mortgage company that places you and your needs at the center of everything we do.</p>
+            <p>
+                Our founder, Mona Mahnaz Dehmohseni started American Multi Lenders mortgage company since 1993 and she has been dedicated her time and effort to her customers. She has worked with homeowners, just like you, to navigate the complex mortgage market. She knows the local market and she knows how to approach lenders to guarantee attractive loans that works for you. You can trust our team at American Multi Lenders to do the hard work and secure the right loan for your home or business.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="stats">
+    <div class="container-1400 animated fadeInUp">
+        <div class="col-sm-2 col-sm-offset-1">
+            <p><span class="counter">100</span>%</p>
+            <h4>Customer Satisfaction</h4>
+        </div>
+        <div class="col-sm-2">
+            <p><span class="counter">24</span> Years</p>
+            <h4>Experience</h4>
+        </div>
+        <div class="col-sm-2">
+            <p><span>Fast</span></p>
+            <h4>Speed</h4>
+        </div>
+        <div class="col-sm-2">
+            <p><span class="counter">100</span>%</p>
+            <h4>Reliability</h4>
+        </div>
+        <div class="col-sm-2">
+            <p><span class="counter">100</span>%</p>
+            <h4>Accountability</h4>
+        </div>
+    </div>
+</div>
+<div class="getaquote" id="getaquote">
+    <div class="container-1400 animated fadeInUp">
+        <h3>Get a Quote</h3>
+        <form name="getQuote" id="getQuote" ng-submit="submitQuote(getQuote)">
+            <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
+                <select ng-model="loanType" name="loanType" id="loanType" required>
+                    <option value="" selected="" disabled="">Select Loan Type</option>
+                    <option>Home Purchase</option>
+                    <option>Refience Loans</option>
+                    <option>Comercial Loans</option>
+                    <option>Construction Loans</option>
+                    <option>Others</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
+                <select ng-model="loanAmount" name="loanAmount" id="loanAmount" required>
+                    <option value="" selected="" disabled="">Select Loan Amount</option>
+                    <option>Below 500,000</option>
+                    <option>Above 500,000</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
+                <select ng-model="propertyValue" name="propertyValue" id="propertyValue" required>
+                    <option value="" selected="" disabled="">Select Property Value</option>
+                    <option>Above 500,000</option>
+                    <option>Below 500,000</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 select-box-col col-sm-6">
+                <select ng-model="history" name="history" id="history" required>
+                    <option value="" selected="" disabled="">Select Credity History</option>
+                    <option>Excelent</option>
+                    <option>Avarage</option>
+                    <option>Bad</option>
+                    <option>Don't Know</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <input ng-model="firstName" name="firstName" id="firstName" type="text" placeholder="First Name" required>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <input ng-model="lastName" name="lastName" id="lastName" type="text" placeholder="Last Name" required>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <input ng-model="phone" name="phone" id="phone" type="tel" placeholder="Phone" required>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <input ng-model="email" name="email" id="email" type="email" placeholder="Email" required>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 submit-col">
+                <input ng-disabled="locked" id="submitForm" type="submit" value="Get My Quote">
+                <div class="quote-status">
+                    <p class="loading" ng-if="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please wait</p>
+                    <p class="success" ng-if="getQuote.$submitted && status && !loading">Your request has been sent successfully!</p>
+                    <p class="failed" ng-if="getQuote.$submitted && !status && !loading">Oops! Something went wrong!</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

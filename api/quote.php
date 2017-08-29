@@ -1,5 +1,8 @@
 <?php
-require_once 'mailer/PHPMailerAutoload.php';
+
+header('Content-type:application/json');
+
+require_once '../mailer/PHPMailerAutoload.php';
 
 $mail = new PHPMailer();
 
@@ -445,16 +448,20 @@ $content = '<!DOCTYPE html>
 </html>
 
 ';
+$postdata = json_decode(file_get_contents('php://input'), true);
 
- if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['history']) && isset($_POST['propertyValue']) && isset($_POST['loanAmount']) && isset($_POST['loanType'])){
-    $content = str_replace('**firstName**',$_POST['firstName'],$content);
-    $content = str_replace('**lastName**',$_POST['lastName'],$content);
-    $content = str_replace('**phone**',$_POST['phone'],$content);
-    $content = str_replace('**email**',$_POST['email'],$content);
-    $content = str_replace('**loanType**',$_POST['loanType'],$content);
-    $content = str_replace('**loanAmount**',$_POST['loanAmount'],$content);
-    $content = str_replace('**propertyValue**',$_POST['propertyValue'],$content);
-    $content = str_replace('**history**',$_POST['history'],$content);
+if(!$postdata){
+    echo "You Clever!";
+}
+else{
+    $content = str_replace('**firstName**',$postdata['firstName'],$content);
+    $content = str_replace('**lastName**',$postdata['lastName'],$content);
+    $content = str_replace('**phone**',$postdata['phone'],$content);
+    $content = str_replace('**email**',$postdata['email'],$content);
+    $content = str_replace('**loanType**',$postdata['loanType'],$content);
+    $content = str_replace('**loanAmount**',$postdata['loanAmount'],$content);
+    $content = str_replace('**propertyValue**',$postdata['propertyValue'],$content);
+    $content = str_replace('**history**',$postdata['history'],$content);
 
 $mail = new PHPMailer;
 $mail->isSMTP();
@@ -463,35 +470,35 @@ $mail->SMTPDebug = 0;
 $mail->Host = "smtp.gmail.com";
 $mail->Port = 587;
 $mail->SMTPAuth = true;
-$mail->Username = "amlenders.contact@gmail.com";
-$mail->Password = "Mamomamo123";
+$mail->Username = "mona.dehmohseni@gmail.com";
+$mail->Password = "!Welcome";
 $mail->setFrom('support@americanmultilenders.com', 'AmericanMultiLenders Support');
 $mail->addReplyTo('no-reply@americanmultilenders.com', 'AmericanMultiLenders Support');
-$mail->addAddress('psikopat.mamo@gmail.com', 'A');
+$mail->addAddress('mona@americanmultilenders.com', 'Mona');
 $mail->Subject = 'You have a new quote request';
 $mail->msgHTML($content);
 $mail->AltBody = 'This is a plain-text message body';
 
     // $mail->CharSet = 'UTF-8';
     // $mail->isSMTP();
-    // $mail->From = $_POST['email'];
+    // $mail->From = $postdata['email'];
     // $mail->FromName = 'AmericanMultiLenders Support';
     // $mail->AddAddress('psikopat.mamo@gmail.coms');
     // $mail->isHTML(true);
     // $mail->Subject = 'You have a new message';
-    // $mail->addReplyTo($_POST['email'], $_POST['firstName']);
+    // $mail->addReplyTo($postdata['email'], $postdata['firstName']);
     // $mail->Body = $content;
 
-
     if(!$mail->send()) {
-        print json_encode(false);
+    print json_encode(false);
         exit;
     }
     else{
-        print json_encode(true);
+    print json_encode(true);
     }
-    }
-    else {
-        print json_encode('checkform');
-    }
+
+}
+ ?>
+
+    
 

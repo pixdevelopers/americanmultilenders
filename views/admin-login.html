@@ -1,0 +1,15 @@
+﻿<div style="width: 400px; text-align: center; padding:100px 50px 200px 50px;">
+    <h3> Login</h3>
+    <form ng-submit="doLogin()">
+        <p>
+            <input ng-model="email" type="email" class="form-control" name="username" required>
+        </p>
+        <p>
+            <input ng-model="password" type="password" class="form-control" name="password" required>
+        </p>
+        <p>
+            <input type="submit" class="btn btn-success btn-block" value="Login">
+        </p>
+        <p ng-if="unsuccessfull">Check Credentials</p>
+    </form>
+</div>
