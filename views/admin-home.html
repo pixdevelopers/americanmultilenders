@@ -43,7 +43,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-xs-4">
+        <div ng-if="currentCat" class="col-xs-4">
             <h5> Add New Form to "{{currentCat.title}}"</h5>
             <form ng-submit="addFormToCat(currentCat)">
                 <label>Enter Form Title:</label>

@@ -320,7 +320,7 @@ $mail->Username = "mona.dehmohseni@gmail.com";
 $mail->Password = "!Welcome";
 $mail->setFrom('support@americanmultilenders.com', 'AmericanMultiLenders Support');
 $mail->addReplyTo('no-reply@americanmultilenders.com', 'AmericanMultiLenders Support');
-$mail->addAddress('mona@americanmultilenders.com', 'Mona');
+$mail->addAddress('support@americanmultilenders.com', 'Mona');
 $mail->Subject = 'You have a new message';
 $mail->msgHTML($content);
 $mail->AltBody = 'This is a plain-text message body';

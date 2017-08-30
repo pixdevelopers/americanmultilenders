@@ -33,9 +33,16 @@
                     redirectTo: '/404'
                 });
         })
-        .run(['$rootScope', '$window', function($rootScope, $window) {
+        .run(['$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
+
+
+            $rootScope.$on('$routeChangeSuccess', function(next, current) {
+                $timeout(function() {
+                    $('.col-lg-3').matchHeight();
+                }, 200);
+            });
             $window.onload = function() {
-                $('.col-lg-3').matchHeight();
+
                 $('.counter').counterUp({
                     delay: 10,
                     time: 1000
@@ -183,6 +190,7 @@
                     data: fd,
                     headers: { 'Content-Type': undefined },
                 }).then(function successCallback(response) {
+                    console.log(response.data);
                     $scope.fileUploadResponse = response.data;
 
                 });
@@ -195,7 +203,7 @@
                     request: 'upload',
                     category: cat,
                     file: {
-                        downloadURL: 'http://'+ base + '/uploads/forms/' + $scope.fileUploadResponse.name,
+                        downloadURL: 'http://' + base + '/uploads/forms/' + $scope.fileUploadResponse.name,
                         size: $scope.fileUploadResponse.size,
                         ext: $scope.fileUploadResponse.ext,
                         date: $scope.fileUploadResponse.date,
