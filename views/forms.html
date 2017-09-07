@@ -20,7 +20,10 @@
             <div class="col-xs-12 col-sm-8 col-md-9">
                 <p class="text-center" ng-if="!currentCat">Select a category from list</p>
                 <div class="forms-content" ng-if="currentCat">
-                    <div class="th">
+                    <div ng-if="currentCat.forms.length < 2" class="th">
+                        {{currentCat.title}} <span>({{currentCat.forms.length}} Document)</span>
+                    </div>
+                    <div ng-if="currentCat.forms.length > 1 " class="th">
                         {{currentCat.title}} <span>({{currentCat.forms.length}} Documents)</span>
                     </div>
                     <div class="tr" ng-repeat="item in currentCat.forms">
@@ -30,7 +33,7 @@
                                 <div class="meta">{{item.date}} | {{item.format}} | {{item.size}}</div>
                             </div>
                             <div class="col-xs-12 col-md-3">
-                                <a class="btn-dl" href="{{item.url}}"> Download</a>
+                                <a target="_blank" class="btn-dl" href="{{item.url}}"> Download</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>

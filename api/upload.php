@@ -20,6 +20,9 @@ $ext = get_extension($filename);
 
 /* Upload file */
 if(move_uploaded_file($_FILES['file']['tmp_name'],$location.$filename)){
-echo json_encode(array("name"=>$filename, "size"=>$size, "ext"=>$ext, "date"=>date("Y-m-d")));   
+echo json_encode(array("status"=>true, "name"=>$filename, "size"=>$size, "ext"=>$ext, "date"=>date("Y-m-d")));   
+}
+else{
+	echo json_encode(array("status"=>false));
 }
 

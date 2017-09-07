@@ -16,9 +16,8 @@
                     controller: 'contactCtrl',
                     templateUrl: 'views/contact.html'
                 })
-                .when('/admin/login', {
+                .when('/admin', {
                     controller: 'loginCtrl',
-
                     templateUrl: 'views/admin-login.html'
                 })
                 .when('/admin/dashboard', {
@@ -114,7 +113,7 @@
                         $cookies.put('isAuth', 'loggedIn');
                         $location.path('admin/dashboard');
                     } else {
-                        $location.path('admin/login');
+                        $location.path('admin');
                         console.log('Wrong Credentials');
                     }
                 });
@@ -122,15 +121,35 @@
             }
 
         }])
-        .controller('adminCtrl', ['$scope', '$route', '$rootScope', '$location', '$http', '$cookies', function($scope, $route, $rootScope, $location, $http, $cookies) {
+        .controller('adminCtrl', ['$scope', '$route', '$rootScope', '$location', '$http', '$cookies', '$timeout', function($scope, $route, $rootScope, $location, $http, $cookies, $timeout) {
             var isAuth = $cookies.get('isAuth');
             if (isAuth == 'loggedIn') {
                 $http.get('api/forms.php').then(function(res) {
                     $scope.cats = angular.fromJson(res.data);
                 });
+                var request = { request: 'getAdmin' };
+                $http.post('api/rest.php', request).then(function(res) {
+                    console.log(res.data);
+                    $scope.adminEmail = res.data.adminEmail;
+                });
             } else {
-                $location.path('admin/login');
+                $location.path('admin');
             }
+
+
+            $timeout(function() {
+                $('#cat-' + $rootScope.returnId).click();
+            }, 200);
+
+            $scope.changeAdmin = function(admin) {
+                var request = { request: 'changeAdmin', email: $scope.adminEmail };
+                $http.post('api/rest.php', request).then(function(res) {
+                    if (res.data) {
+                        $route.reload();
+                    }
+                });
+            }
+
             $scope.addCat = function(cat) {
                 var category = { request: 'add', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
@@ -139,6 +158,16 @@
                 });
             }
 
+            $scope.removeForm = function(form, id, cat) {
+                console.log(form);
+                var req = { request: 'removeForm', form: form, id: id };
+                $http.post('api/rest.php', req).then(function(res) {
+                    if (res.data) {
+                        $rootScope.returnId = cat.id;
+                        $route.reload();
+                    }
+                });
+            }
             $scope.addForm = function(cat) {
                 var category = { request: 'addForm', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
@@ -150,13 +179,17 @@
 
             $scope.doLogout = function() {
                 $cookies.put('isAuth', false);
-                $location.path('admin/login');
+                $location.path('admin');
             }
 
             $scope.selectCat = function(category) {
                 $scope.addNewCat = false;
                 $scope.currentCat = category;
-                $scope.currentCat.forms = angular.fromJson(category.forms);
+                var req = { request: 'listForms', category: category };
+                $http.post('api/rest.php', req).then(function(res) {
+                    console.log(res.data);
+                    $scope.currentCat.forms = angular.fromJson(res.data);
+                });
 
             }
             $scope.removeCat = function(cat) {
@@ -173,14 +206,16 @@
             $scope.updateCat = function(cat) {
                 var category = { request: 'update', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
-                    console.log(res.data);
+                    if (res.data) {
+                        $rootScope.returnId = cat.id;
+                        $route.reload();
+                    }
                 });
-
 
             }
 
             $scope.upload = function() {
-
+                $scope.isUploading = true;
                 var fd = new FormData();
                 var files = document.getElementById('file').files[0];
                 fd.append('file', files);
@@ -190,13 +225,17 @@
                     data: fd,
                     headers: { 'Content-Type': undefined },
                 }).then(function successCallback(response) {
+                    $scope.isUploading = false;
+                    $scope.submitted = true;
+
                     console.log(response.data);
                     $scope.fileUploadResponse = response.data;
-
+                    $scope.uploadStatus = response.data.status;
                 });
             }
 
             $scope.addFormToCat = function(cat) {
+                $scope.returnCat = cat;
                 var base = $location.host();
                 var downloadURL = $location.$$absUrl + '/' + $scope.fileUploadResponse.name;
                 var req = {
@@ -207,13 +246,22 @@
                         size: $scope.fileUploadResponse.size,
                         ext: $scope.fileUploadResponse.ext,
                         date: $scope.fileUploadResponse.date,
-                        title: $scope.newFormTitle
+                        title: angular.element('#newFormTitle').val()
                     }
                 };
                 $http.post('api/rest.php', req).then(function(res) {
-                    console.log(res);
+                    console.log(res.data);
+                    if (res.data) {
+                        $rootScope.returnId = $scope.returnCat.id;
+                        $route.reload();
+                    }
                 });
             }
+
+
+
+
+
         }])
         .controller('contactCtrl', ['$http', '$scope', '$timeout', function($http, $scope, $timeout) {
 
@@ -281,8 +329,14 @@
             });
 
             $scope.selectCat = function(category) {
+                $scope.addNewCat = false;
                 $scope.currentCat = category;
-                $scope.currentCat.forms = angular.fromJson(category.forms);
+                var req = { request: 'listForms', category: category };
+                $http.post('api/rest.php', req).then(function(res) {
+                    console.log(res.data);
+                    $scope.currentCat.forms = angular.fromJson(res.data);
+                });
+
             }
 
         }]);

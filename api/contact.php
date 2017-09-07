@@ -5,7 +5,7 @@ header('Content-type:application/json');
 require_once '../mailer/PHPMailerAutoload.php';
 
 $mail = new PHPMailer();
-
+require('db.php');
 $content = '<!DOCTYPE html>
 <html>
 <head>
@@ -298,6 +298,16 @@ $content = '<!DOCTYPE html>
 </html>
 
 ';
+
+        $sql = "SELECT * FROM settings";
+        $result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+            $adminEmail = $row["admin"];
+    }
+}
+
+
 $postdata = json_decode(file_get_contents('php://input'), true);
 
 if(!$postdata){
@@ -320,7 +330,7 @@ $mail->Username = "mona.dehmohseni@gmail.com";
 $mail->Password = "!Welcome";
 $mail->setFrom('support@americanmultilenders.com', 'AmericanMultiLenders Support');
 $mail->addReplyTo('no-reply@americanmultilenders.com', 'AmericanMultiLenders Support');
-$mail->addAddress('support@americanmultilenders.com', 'Mona');
+$mail->addAddress($adminEmail, 'Mona');
 $mail->Subject = 'You have a new message';
 $mail->msgHTML($content);
 $mail->AltBody = 'This is a plain-text message body';
