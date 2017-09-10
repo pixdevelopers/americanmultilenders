@@ -9,16 +9,20 @@
     <title>American Multi Lenders</title>
     <base href="/">
     <link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link ng-if="!isAdmin" rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link ng-if="!isAdmin" rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link ng-if="isAdmin" rel="stylesheet" href="css/admin/css/bootstrap.min.css">
+    <link ng-if="isAdmin" rel="stylesheet" href="css/admin/css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <link ng-if="isAdmin" rel="stylesheet" href="css/admin/css/style.blue.css" id="theme-stylesheet">
+    <link ng-if="isAdmin" rel="stylesheet" href="css/admin/css/custom.css">
 </head>
 
 <body>
-    <ng-include src="'views/header.html'"></ng-include>
+    <ng-include src="views/header.html"></ng-include>
     <ng-view autoscroll="true"></ng-view>
-    <ng-include src="'views/footer.html'"></ng-include>
+    <ng-include src="views/footer.html"></ng-include>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-cookies.min.js"></script>

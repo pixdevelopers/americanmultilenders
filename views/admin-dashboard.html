@@ -1,0 +1,209 @@
+﻿<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+            <div class="sidenav-header-inner text-center pt-3">
+                <h2 class="h5  py-2 ">Welcome Mona!</h2><span class="text-uppercase"> </span>
+            </div>
+            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
+        </div>
+        <div class="main-menu">
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+                <li><a ng-click="activePage='forms'" href="#"> <i class="icon-home"></i><span>Forms</span></a></li>
+                <li> <a ng-click="activePage='settings'" href="#"><i class="icon-form"></i><span>Settings</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="page home-page">
+    <!-- navbar-->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <a ng-click="doLogout()" href="#" class="text-right nav-link logout">Logout<i class="fa fa-sign-out"></i></a>
+            </div>
+        </nav>
+    </header>
+    <section ng-if="activePage=='settings'" class="forms">
+        <div class="container-fluid">
+            <header>
+                <h1 class="h3 display">Settings</h1>
+            </header>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Admin Email Address</h2>
+                        </div>
+                        <div class="card-block">
+                            <p>All Quote requests and Contact form messages will be sent to email below</p>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input ng-model="supportEmail" class="form-control" type="text"> </div>
+                            <div class="form-group pt-4">
+                                <button ng-click="changeAdmin(supportEmail)" class="btn btn-primary">Update Email Address</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Your Credentials</h2>
+                        </div>
+                        <div class="card-block">
+                            <form>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input ng-model="loginUser" type="email" placeholder="Email Address" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input ng-model="loginPass" type="password" placeholder="Password" class="form-control">
+                                </div>
+                                <div class="pt-4 form-group">
+                                    <button ng-click="changeUser(loginUser,loginPass)" class=" btn btn-primary">Update Credentials</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section ng-if="activePage=='forms'" class="updates section-padding">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-12">
+                    <!-- Recent Updates            -->
+                    <div class="wrapper recent-uodated">
+                        <div id="new-updates" class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="h5 display"><a  aria-expanded="true" aria-controls="upadtes-box">Categories</a></h2>
+                        </div>
+                        <div ng-if="!cats" class="card-block">
+                            <p>No Category</p>
+                        </div>
+                        <div id="upadtes-box" role="tabpanel" class="collapse show">
+                            <ul class="news list-unstyled">
+                                <!-- Item-->
+                                <li ng-class="{'active':item.id == currentCat.id}" style="cursor:pointer;" id="cat-{{item.id}}" ng-click="selectCat(item)" ng-repeat="item in cats | orderBy:'id'" class="d-flex justify-content-between sidebar-cat-list-item">
+                                    <div class="left-col d-flex">
+                                        <div class="title">
+                                            <p>{{item.title}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="my-4 wrapper recent-uodated">
+                        <div id="new-updates" class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="h5 display"><a  aria-expanded="true" aria-controls="upadtes-box">Add New Category</a></h2>
+                        </div>
+                        <div class="card-block">
+                            <p>Enter Category Title:</p>
+                            <form ng-submit="addCat(newCatName)">
+                                <div class="form-group">
+                                    <input ng-model="newCatName" type="text" class="form-control" name="newCatName" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success btn-block" value="Add New Category">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="currentCat" class="col-lg-9 col-md-12">
+                    <div class="wrapper recent-uodated">
+                        <div id="new-updates" class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="h5 display">Edit Category</h2>
+                        </div>
+                        <div id="upadtes-box" role="tabpanel" class="collapse show">
+                            <div class="card-block">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Enter new category name:</label>
+                                        <input ng-model="currentCat.title" type="text" class="form-control" name="editCatName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button ng-click="updateCat(currentCat)" class="btn btn-primary">Update Category Name</button>
+                                        <button ng-click="removeCat(currentCat)" class="btn btn-secondary">Delete Category</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="currentCat.forms.length > 0" class="wrapper my-4 recent-uodated">
+                        <div id="new-updates" class="card-header d-flex justify-content-between align-items-center">
+                            <h2 class="h5 display"><strong>View Forms</strong></h2>
+                        </div>
+                        <div id="upadtes-box" role="tabpanel" class="collapse show">
+                            <ul class="news list-unstyled">
+                                <li ng-repeat="item in currentCat.forms" class="d-flex justify-content-between">
+                                    <div class="left-col d-flex">
+                                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                                        <div class="title"><strong>{{item.title}}</strong>
+                                            <p>{{item.date}} | {{item.format}} | {{item.size}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="right-col text-right">
+                                        <a class="btn-dl" href="{{item.url}}" target="_new"> View</a> |
+                                        <a ng-click="removeForm(item,item.id,currentCat)" class="btn-dl" href="#"> Delete</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cardz mt-4">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display">Add new form</h2>
+                        </div>
+                        <div class="card-block">
+                            <form name="addFormToCatForm" ng-submit="addFormToCat(currentCat)">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 form-control-label">Form Title</label>
+                                    <div class="col-sm-10">
+                                        <input id="newFormTitle" ng-model="newFormTitle" type="text" class="form-control" name="newFormTitle" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 form-control-label">Upload From</label>
+                                    <div class="col-sm-10">
+                                        <div class="mmm form-group">
+                                            <div class="mmm input-group">
+                                                <input class="form-control" type='file' name='file' id='file' required>
+                                                <span class="input-group-btn">
+                              <button id='upload' ng-click='upload()' ng-disabled="isUploading" type="button" class="btn btn-primary">Upload From</button></span>
+                                            </div>
+                                        </div>
+                                        <div class="mmm form-group quote-status">
+                                            <p class="loading" ng-if="isUploading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Uploading...</p>
+                                            <p class="success" ng-if="submitted && !isUploading && uploadStatus">The form has been uploaded successfully
+                                            </p>
+                                            <p class="failed" ng-if="submitted && !isUploading && !uploadStatus">Oops! Something went wrong!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4 offset-sm-2">
+                                        <button ng-disabled="isUploading" type="submit" class="btn btn-primary">Save From</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Statistics Section-->
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>American Multi Lenders &copy; 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

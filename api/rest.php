@@ -5,7 +5,7 @@ $request = $postdata['request'];
 require('db.php');
 
 
-if ($request == 'getAdmin'){
+if ($request == 'getSupport'){
 
 		$sql = "SELECT * FROM settings";
 		$result = $conn->query($sql);
@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
 }
 
 
-if ($request == 'changeAdmin'){
+if ($request == 'changeSupport'){
 $email = $postdata['email'];
 $sql = "UPDATE settings SET admin='".$email."'";
 	if ($conn->query($sql) === TRUE) {
@@ -30,6 +30,37 @@ $sql = "UPDATE settings SET admin='".$email."'";
 	}
 
 }
+
+
+if ($request == 'getAdmin'){
+
+		$sql = "SELECT * FROM users";
+		$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+            $arr = array(
+        	'adminEmail' => $row["user"],
+        	'adminPass' => $row["pass"]
+        	);
+    }
+    echo json_encode($arr);
+} 
+}
+
+
+if ($request == 'changeAdmin'){
+$email = $postdata['email'];
+$pass = md5($postdata['password']);
+$sql = "UPDATE users SET user='".$email."' , pass='".$pass."'";
+	if ($conn->query($sql) === TRUE) {
+	    echo json_encode($conn->query($sql));
+	} else {
+	    echo json_encode(false);
+	}
+
+}
+
+
 
 
 if ($request == 'add'){

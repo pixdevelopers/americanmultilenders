@@ -23,7 +23,7 @@
                 .when('/admin/dashboard', {
                     controller: 'adminCtrl',
 
-                    templateUrl: 'views/admin-home.html'
+                    templateUrl: 'views/admin-dashboard.html'
                 })
                 .when('/404', {
                     templateUrl: 'views/404.html'
@@ -102,10 +102,14 @@
         }])
 
         .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$http', '$cookies', function($scope, $rootScope, $location, $http, $cookies) {
+
+            $rootScope.isAdmin = true;
             var isAuth = $cookies.get('isAuth');
             if (isAuth == 'loggedIn') {
                 $location.path('admin/dashboard');
             }
+
+
             $scope.doLogin = function() {
                 var data = { username: $scope.email, password: $scope.password };
                 $http.post('api/login.php', data).then(function(res) {
@@ -114,6 +118,7 @@
                         $location.path('admin/dashboard');
                     } else {
                         $location.path('admin');
+                        $scope.unsuccessfull = true;
                         console.log('Wrong Credentials');
                     }
                 });
@@ -122,15 +127,22 @@
 
         }])
         .controller('adminCtrl', ['$scope', '$route', '$rootScope', '$location', '$http', '$cookies', '$timeout', function($scope, $route, $rootScope, $location, $http, $cookies, $timeout) {
+            $rootScope.isAdmin = true;
+            $scope.activePage = "forms";
             var isAuth = $cookies.get('isAuth');
             if (isAuth == 'loggedIn') {
                 $http.get('api/forms.php').then(function(res) {
                     $scope.cats = angular.fromJson(res.data);
                 });
-                var request = { request: 'getAdmin' };
+                var request = { request: 'getSupport' };
+                var getadminreq = { request: 'getAdmin' };
                 $http.post('api/rest.php', request).then(function(res) {
                     console.log(res.data);
-                    $scope.adminEmail = res.data.adminEmail;
+                    $scope.supportEmail = res.data.adminEmail;
+                });
+                $http.post('api/rest.php', getadminreq).then(function(res) {
+                    console.log(res.data);
+                    $scope.loginUser = res.data.adminEmail;
                 });
             } else {
                 $location.path('admin');
@@ -142,10 +154,19 @@
             }, 200);
 
             $scope.changeAdmin = function(admin) {
-                var request = { request: 'changeAdmin', email: $scope.adminEmail };
+                var request = { request: 'changeSupport', email: admin };
                 $http.post('api/rest.php', request).then(function(res) {
                     if (res.data) {
                         $route.reload();
+                    }
+                });
+            }
+
+            $scope.changeUser = function(user, pass) {
+                var request = { request: 'changeAdmin', email: user, password: pass };
+                $http.post('api/rest.php', request).then(function(res) {
+                    if (res.data) {
+                        $scope.doLogout();
                     }
                 });
             }
@@ -328,6 +349,7 @@
                 $scope.cats = angular.fromJson(res.data);
             });
 
+
             $scope.selectCat = function(category) {
                 $scope.addNewCat = false;
                 $scope.currentCat = category;
@@ -339,6 +361,11 @@
 
             }
 
+            $scope.expandCat = function(cat, index) {
+                if (index == 0) {
+                    $scope.selectCat(cat);
+                }
+            }
         }]);
 
 })();

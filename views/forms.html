@@ -13,7 +13,7 @@
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="forms-sidebar">
                     <ul>
-                        <li><a ng-class="{'active':currentCat.id==item.id}" ng-click="selectCat(item)" ng-repeat="item in cats" href="#"><i class="fa fa-caret-right"></i>{{item.title}}</a> </li>
+                        <li><a ng-init="expandCat(item,$index)" ng-class="{'active':currentCat.id==item.id}" ng-click="selectCat(item)" ng-repeat="item in cats" href="#"><i class="fa fa-caret-right"></i>{{item.title}}</a> </li>
                     </ul>
                 </div>
             </div>
