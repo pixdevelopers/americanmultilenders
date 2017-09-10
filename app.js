@@ -137,11 +137,9 @@
                 var request = { request: 'getSupport' };
                 var getadminreq = { request: 'getAdmin' };
                 $http.post('api/rest.php', request).then(function(res) {
-                    console.log(res.data);
                     $scope.supportEmail = res.data.adminEmail;
                 });
                 $http.post('api/rest.php', getadminreq).then(function(res) {
-                    console.log(res.data);
                     $scope.loginUser = res.data.adminEmail;
                 });
             } else {
@@ -174,13 +172,11 @@
             $scope.addCat = function(cat) {
                 var category = { request: 'add', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
-                    console.log(res.data);
                     $route.reload();
                 });
             }
 
             $scope.removeForm = function(form, id, cat) {
-                console.log(form);
                 var req = { request: 'removeForm', form: form, id: id };
                 $http.post('api/rest.php', req).then(function(res) {
                     if (res.data) {
@@ -192,7 +188,6 @@
             $scope.addForm = function(cat) {
                 var category = { request: 'addForm', category: cat };
                 $http.post('api/rest.php', category).then(function(res) {
-                    console.log(res.data);
                     $route.reload();
                 });
             }
@@ -208,7 +203,6 @@
                 $scope.currentCat = category;
                 var req = { request: 'listForms', category: category };
                 $http.post('api/rest.php', req).then(function(res) {
-                    console.log(res.data);
                     $scope.currentCat.forms = angular.fromJson(res.data);
                 });
 
@@ -217,7 +211,6 @@
                 var category = { request: 'remove', category: cat };
                 if (confirm('Are you sure? This will remove all forms inside the category!')) {
                     $http.post('api/rest.php', category).then(function(res) {
-                        console.log(res.data);
                         $route.reload();
                     });
                 }
@@ -271,7 +264,6 @@
                     }
                 };
                 $http.post('api/rest.php', req).then(function(res) {
-                    console.log(res.data);
                     if (res.data) {
                         $rootScope.returnId = $scope.returnCat.id;
                         $route.reload();
@@ -297,7 +289,6 @@
                 $scope.locked = true;
 
                 $http.post('api/contact.php', data).then(function(res) {
-                    console.log(res);
                     if (res.data) {
                         $scope.status = true;
                     } else $scope.status = false;
@@ -330,7 +321,6 @@
                 $scope.locked = true;
 
                 $http.post('api/quote.php', data).then(function(res) {
-                    console.log(res);
                     if (res.data) {
                         $scope.status = true;
                     } else $scope.status = false;
@@ -355,7 +345,6 @@
                 $scope.currentCat = category;
                 var req = { request: 'listForms', category: category };
                 $http.post('api/rest.php', req).then(function(res) {
-                    console.log(res.data);
                     $scope.currentCat.forms = angular.fromJson(res.data);
                 });
 
