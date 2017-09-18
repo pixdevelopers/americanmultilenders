@@ -20,9 +20,9 @@
 </head>
 
 <body>
-    <ng-include src="views/header.html"></ng-include>
+    <ng-include ng-hide="isAdmin" src="'views/header.html'"></ng-include>
     <ng-view autoscroll="true"></ng-view>
-    <ng-include src="views/footer.html"></ng-include>
+    <ng-include ng-hide="isAdmin" src="'views/footer.html'"></ng-include>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-cookies.min.js"></script>
