@@ -152,7 +152,9 @@ if ($result->num_rows > 0) {
         	'date' => $row["date"],
         	'format' => $row["format"],
         	'url' => $row["url"],
-        	'size' => $row["size"]
+        	'size' => $row["size"],
+        	'position' => $row["position"]
+
     );
     array_push($response,$arr);
     }
@@ -161,6 +163,36 @@ if ($result->num_rows > 0) {
     echo "0 results";
 };
 }
+
+if ($request=='saveOrder'){
+	$theArray = $postdata['array'];
+	$sql = '';
+	foreach ($theArray as $key => $value) {
+	$sql .= "UPDATE categories SET position='".$theArray[$key]["position"]."' WHERE `id`='".$theArray[$key]["id"]."'; ";
+
+}
+
+	echo json_encode($conn->multi_query($sql));
+
+}
+
+
+
+
+if ($request=='saveFormsOrder'){
+	$theArray = $postdata['array'];
+	$sql = '';
+	foreach ($theArray as $key => $value) {
+	$sql .= "UPDATE forms SET position='".$theArray[$key]["position"]."' WHERE `id`='".$theArray[$key]["id"]."'; ";
+
+}
+
+	echo json_encode($conn->multi_query($sql));
+
+}
+
+
+
 
 $conn->close();
 

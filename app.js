@@ -151,6 +151,44 @@
                 $('#cat-' + $rootScope.returnId).click();
             }, 200);
 
+            $scope.saveOrder = function() {
+                var newArray = [];
+                for (var i = 0; i < $scope.cats.length; i++) {
+                    newArray.push({ id: $scope.cats[i].id, position: $scope.cats[i].position });
+                }
+
+                var request = { request: 'saveOrder', array: newArray };
+                console.log(request);
+                $http.post('api/rest.php', request).then(function(res) {
+                    if (res.data) {
+                        toastr.success('Success', 'Categories order has been updated successfully!');
+
+                        $route.reload();
+                    }
+                });
+
+            }
+
+
+            $scope.saveFormsOrder = function(cat) {
+                var newArray = [];
+                for (var i = 0; i < $scope.currentCat.forms.length; i++) {
+                    newArray.push({ id: $scope.currentCat.forms[i].id, position: $scope.currentCat.forms[i].position });
+                }
+
+                var request = { request: 'saveFormsOrder', array: newArray };
+                console.log(request);
+                $http.post('api/rest.php', request).then(function(res) {
+                    if (res.data) {
+                        toastr.success('Success', 'Forms order has been updated successfully!');
+                        $rootScope.returnId = cat.id;
+                        $route.reload();
+                    }
+                });
+
+            }
+
+
             $scope.changeAdmin = function(admin) {
                 var request = { request: 'changeSupport', email: admin };
                 $http.post('api/rest.php', request).then(function(res) {

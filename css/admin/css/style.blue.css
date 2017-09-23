@@ -11,6 +11,32 @@ Bootstrapious Boilerplate Template
 *     GENERAL STYLE
 * ==========================================================
 */
+
+.aml-sort-cats{
+width: 50px !important;
+  -webkit-appearance: none !important; 
+
+
+}
+
+.aml-sort-cats::-webkit-inner-spin-button, 
+.aml-sort-cats::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.save-cats{
+  font-size:12px !important;
+  cursor: pointer;
+  color: #5cb85c !important;
+}
+
+.save-cats .fa{
+  font-size:14px !important;
+
+  margin-right: 5px;
+}
+
 a {
   display: inline-block;
   text-decoration: none;

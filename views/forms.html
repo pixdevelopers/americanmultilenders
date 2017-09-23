@@ -13,7 +13,7 @@
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="forms-sidebar">
                     <ul>
-                        <li><a ng-init="expandCat(item,$index)" ng-class="{'active':currentCat.id==item.id}" ng-click="selectCat(item)" ng-repeat="item in cats" href="#"><i class="fa fa-caret-right"></i>{{item.title}}</a> </li>
+                        <li><a ng-init="expandCat(item,$index)" ng-class="{'active':currentCat.id==item.id}" ng-click="selectCat(item)" ng-repeat="item in cats | orderBy:'position'" href="#"><i class="fa fa-caret-right"></i>{{item.title}}</a> </li>
                     </ul>
                 </div>
             </div>
@@ -26,10 +26,10 @@
                     <div ng-if="currentCat.forms.length > 1 " class="th">
                         {{currentCat.title}} <span>({{currentCat.forms.length}} Documents)</span>
                     </div>
-                    <div class="tr" ng-repeat="item in currentCat.forms">
+                    <div class="tr" ng-repeat="item in currentCat.forms | orderBy:'position'">
                         <div class="row">
                             <div class="col-xs-12 col-md-9">
-                                <div class="title">{{item.title}}</div>
+                                <div class="title">{{item.title}} {{item.position}}</div>
                                 <div class="meta">{{item.date}} | {{item.format}} | {{item.size}}</div>
                             </div>
                             <div class="col-xs-12 col-md-3">

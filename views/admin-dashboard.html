@@ -85,14 +85,20 @@
                         <div id="upadtes-box" role="tabpanel" class="collapse show">
                             <ul class="news list-unstyled">
                                 <!-- Item-->
-                                <li ng-class="{'active':item.id == currentCat.id}" style="cursor:pointer;" id="cat-{{item.id}}" ng-click="selectCat(item)" ng-repeat="item in cats | orderBy:'id'" class="d-flex justify-content-between sidebar-cat-list-item">
-                                    <div class="left-col d-flex">
+                                <li ng-class="{'active':item.id == currentCat.id}" style="cursor:pointer;" id="cat-{{item.id}}" ng-repeat="item in cats | orderBy:'title'" class="d-flex justify-content-between sidebar-cat-list-item">
+                                    <div ng-click="selectCat(item)" class="left-col d-flex">
                                         <div class="title">
                                             <p>{{item.title}}</p>
                                         </div>
                                     </div>
+                                    <div class="right-col d-flex">
+                                        <input value="{{item.position}}" ng-model="item.position" class="form-control aml-sort-cats" type="number">
+                                    </div>
                                 </li>
                             </ul>
+                            <div class="form-group text-center">
+                                <button style="font-size: 14px !important;" ng-click="saveOrder()" class="my-4 btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Update Categories Order</button>
+                            </div>
                         </div>
                     </div>
                     <div class="my-4 wrapper recent-uodated">
@@ -135,11 +141,15 @@
                     <div ng-if="currentCat.forms.length > 0" class="wrapper my-4 recent-uodated">
                         <div id="new-updates" class="card-header d-flex justify-content-between align-items-center">
                             <h2 class="h5 display"><strong>View Forms</strong></h2>
+                            <span style="cursor: pointer; color:#444;" ng-click="saveFormsOrder(currentCat)">Update Forms Order</span>
+
                         </div>
                         <div id="upadtes-box" role="tabpanel" class="collapse show">
                             <ul class="news list-unstyled">
                                 <li ng-repeat="item in currentCat.forms" class="d-flex justify-content-between">
+
                                     <div class="left-col d-flex">
+                                        <input value="{{item.position}}" ng-model="item.position" class="form-control aml-sort-cats" type="number">
                                         <div class="icon"><i class="icon-rss-feed"></i></div>
                                         <div class="title"><strong>{{item.title}}</strong>
                                             <p>{{item.date}} | {{item.format}} | {{item.size}}</p>
@@ -172,7 +182,7 @@
                                             <div class="mmm input-group">
                                                 <input class="form-control" type='file' name='file' id='file' required>
                                                 <span class="input-group-btn">
-                              <button id='upload' ng-click='upload()' ng-disabled="isUploading" type="button" class="btn btn-primary">Upload From</button></span>
+  <button id='upload' ng-click='upload()' ng-disabled="isUploading" type="button" class="btn btn-primary">Upload From</button></span>
                                             </div>
                                         </div>
                                         <div class="mmm form-group quote-status">

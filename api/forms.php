@@ -8,7 +8,8 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
             $arr = array(
         	'id' => $row["id"],
-        	'title' => $row["title"]
+        	'title' => $row["title"],
+        	'position' => $row["position"]
     );
     array_push($response,$arr);
     }
