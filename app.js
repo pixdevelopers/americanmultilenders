@@ -46,6 +46,8 @@
                     delay: 10,
                     time: 1000
                 });
+                new Clipboard('.clp-btn');
+
                 $('.whoweare .container-1400').fadeOut();
                 var stickynav = $('.tiny-text').waypoint({
 
